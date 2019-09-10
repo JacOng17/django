@@ -724,3 +724,41 @@ $
 ---
 
 ## Dynamic data in templates
+
+In our `post_list` view we will need to take the models we want to display and pass them to the template. In a view we decide what (model) will be displayed in a template.
+
+Open our `blog/views.py` in our code editor.
+
+```python
+from django.shortcuts import render
+from django.utils import timezone
+from .models import Post
+
+def post_list(request):
+    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    return render(request, 'blog/post_list.html', {'posts': posts})
+```
+
+---
+
+## Django templates
+
+Time to display some data! Django gives us some helpful built-in template tags for that. Django template tags allow us to transfer Python-like things into HTML, so you can build dynamic websites faster.
+
+### Display post list template
+
+In `blog/templates/blog/post_list.html`
+
+```python
+<div>
+    <h1><a href="/">Django Girls Blog</a></h1>
+</div>
+
+{% for post in posts %}
+    <div>
+        <p>published: {{ post.published_date }}</p>
+        <h2><a href="">{{ post.title }}</a></h2>
+        <p>{{ post.text|linebreaksbr }}</p>
+    </div>
+{% endfor %}
+```
