@@ -206,7 +206,7 @@ DATABASES = {
 }
 ```
 
-To create a database for our blog, let's run the following in the console: `python manage.py migrate` (we need to be in the django directory that contains the manage.py file).
+To create a database for our blog, let's run the following in the console: `python manage.py migrate` (we need to be in the django directory that contains the `manage.py` file).
 
 ---
 
